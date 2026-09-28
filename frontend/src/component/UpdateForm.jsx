@@ -1,6 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const UpdateForm = () => {
   const [name, setName] = useState("");
