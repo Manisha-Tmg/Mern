@@ -22,7 +22,11 @@ const ReadAll = () => {
       navigate(`/readSpecific/${_id}`);
     };
   };
-  // getData();
+  const handleUpdate = (_id) => {
+    return async () => {
+      navigate(`/update/${_id}`);
+    };
+  };
 
   return (
     <div>
@@ -34,7 +38,12 @@ const ReadAll = () => {
               {value.price}
             </p>
             <button onClick={handleView(value._id)}>View</button>
-            <button style={{ marginLeft: "10px" }}>Update</button>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={handleUpdate(value._id)}
+            >
+              Update
+            </button>
           </div>
         );
       })}
