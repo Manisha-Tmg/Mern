@@ -22,12 +22,22 @@ const ReadAll = () => {
       navigate(`/readSpecific/${_id}`);
     };
   };
+
   const handleUpdate = (_id) => {
     return async () => {
       navigate(`/update/${_id}`);
     };
   };
 
+  const handleDelete = (_id) => {
+    return async () => {
+      const data = await axios({
+        url: `http://localhost:8000/product/${_id}`,
+        method: "DELETE",
+      });
+    };
+  };
+  getData();
   return (
     <div>
       {products.map((value, i) => {
@@ -43,6 +53,12 @@ const ReadAll = () => {
               onClick={handleUpdate(value._id)}
             >
               Update
+            </button>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={handleDelete(value._id)}
+            >
+              Delete
             </button>
           </div>
         );

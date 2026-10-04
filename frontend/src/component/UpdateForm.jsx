@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { data, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const UpdateForm = () => {
   const [name, setName] = useState("");
@@ -8,26 +9,8 @@ const UpdateForm = () => {
   const [price, setPrice] = useState("");
   const [isDamage, setIsDamage] = useState(false);
   const params = useParams();
-  const id = params.id;
 
-  const getDate = async () => {
-    const data = await axios({
-      url: `http://localhost:8000/product/${id}`,
-      method: "GET",
-    });
-    setName(data.data.result.name);
-    setPrice(data.data.result.price);
-    setQuantity(data.data.result.quantity);
-    setIsDamage(data.data.result.isDamage);
-  };
-  console.log(data);
-
-  useEffect(() => {
-    getDate();
-  }, []);
-
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleUpdate = async () => {
     const data = {
       name: name,
       quantity: quantity,
@@ -36,11 +19,26 @@ const UpdateForm = () => {
     };
 
     const result = await axios({
-      url: `http://localhost:8000/product/${id}`,
+      url: `http://localhost:8000/product/${params.id}`,
       method: "PATCH",
       data: data,
     });
   };
+
+  const getDate = async () => {
+    const data = await axios({
+      url: `http://localhost:8000/product/${params.id}`,
+      method: "GET",
+    });
+    setName(data.data.result.name);
+    setQuantity(data.data.result.quantity);
+    setPrice(data.data.result.price);
+    setIsDamage(data.data.result.isDamage);
+  };
+
+  useEffect(() => {
+    getDate();
+  }, []);
 
   return (
     <form>
@@ -96,7 +94,7 @@ const UpdateForm = () => {
           </div>
         </div>
         <div style={{ marginTop: "10px" }}>
-          <button onClick={handleClick}>Update</button>
+          <button onClick={handleUpdate}>Update</button>
         </div>
       </div>
     </form>

@@ -17,3 +17,9 @@ readSpecific
 url
 method
 id
+
+C=create
+R=read
+U=update
+D=Delete
+

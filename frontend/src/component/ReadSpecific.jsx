@@ -7,7 +7,7 @@ const ReadSpecific = () => {
   const [product, setProduct] = useState();
   const params = useParams();
   const id = params.id;
-  
+
   const getDate = async () => {
     const data = await axios({
       url: `http://localhost:8000/product/${id}`,
